@@ -1,0 +1,31 @@
+################################################################################
+#VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV#
+#VVVVVVVVVVVVVVVVVVVVVV                          VVVVVVVVV                VVVVV#
+#VVVVVVVVVVVVVVVVV                 VVVV                 VVVVV            VVVVVV#
+#VVVVVVVVVVVVVVVVV    VVVVVVVVVVVVVVVVVVVV   VVVVVVVV     VVVVV     D    VVVVVV#
+#VVVVVVVVVVVVVVV    VVVVVVVVV                  VVVV                        VVVV#
+#VVVVVVVVV               VVVV                    VVVV        VVVVVV       VVVVV#
+#VVVVVVVV                 VVVV   M                 VVVVVVVVVVVVVVVVVVXXXVVVVVVV#
+#VVVVVVV                   VVVV      VVVV       VVVVVVVVVVVVVVVVVVVVVXXXVVVVVV #
+#VVVVVV                     VVVV   VVVV     VVVVVVVVVVVVVVVVVVVVVVVVV    VVVVV #
+#VVVVV                       VVVVVVVV    VVVVVVVVVVVVVVVVVVVVV             VVV #
+#VVVV     ###########        VVVV        VVVVVVVVVVVVVVVVVV    VVV        VVV  #
+#VVVV     #         #        VVVVVVVVVVVVVVVVVVVVVVVVV                VVV      #
+#VVVV     #    A    #        VVVVVVVVVVVVVVVVVVVVV         C   VVV             #
+#VVVV     #         #        VVVVVVVVVVVVVVV         VVV                VVV    #
+#VVVV     ####   ####        VVVVVVVVVVVVVV                                    #
+#VVVV                        VVVVVVVVVVVV     VVV       VVV          C         #
+#VVVV                        VVVV               C VVV         VVV        VVV   #
+#VVVVV                      VVVV       VVV                                     #
+#VVVVVV                    VVVV                VVV                 VVV         #
+#VVVVVVV                  VVVV                                                 #
+#VVVVVVVV                VVVV   VVV   ######X####          VVV         VVV     #
+#VVVVVVVVVVVV   VVVVVVVVVVVV          #         #                C             #
+#VVVVVVVVVVVV   VVVVVVVVVVV           #     C   #     VVV                      #
+#VVVVVVVVVVVV   VVVVVVVVVV            #         X                              #
+#       VVVVV     VVVVV        VVV    #X###X#############           VVVXXXXXVVV#
+#    VVVVV          VVVVV             #                 #          VVV       VV#
+# VV      P     VV    VVVVV           #       C         #        VVV       VV  #
+#      V VV          VV               ###################       VVV      C  VV #
+#   VV          VV    VV        VVV                             VVVVVVVVVVVVVVV#
+################################################################################
