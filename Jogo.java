@@ -117,6 +117,10 @@ public class Jogo extends JFrame implements KeyListener {
         if (mapa.getContador() == 0) {
             termina();
         }
+
+        if (mapa.getContador() == 2) {
+            JOptionPane.showMessageDialog(this, "Você achou uma chave! O que será que ela faz?");
+        }
     }
 
     public void ataca() {

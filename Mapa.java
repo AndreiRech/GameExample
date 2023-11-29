@@ -11,21 +11,23 @@ public class Mapa {
     private List<String> mapa;
     private Map<Character, ElementoMapa> elementos;
 
-    private int x = 50; // Posição inicial X do personagem
-    private int y = 50; // Posição inicial Y do personagem
-    private final int TAMANHO_CELULA = 10; // Tamanho de cada célula do mapa
-    private boolean[][] areaRevelada; // Rastreia quais partes do mapa foram reveladas
+    private int x = 50; 
+    private int y = 50; 
+    private final int TAMANHO_CELULA = 10; 
+    private boolean[][] areaRevelada; 
 
-    private final Color brickColor = new Color(153, 76, 0); // Cor marrom para tijolos
-    private final Color vegetationColor = new Color(34, 139, 34); // Cor verde para vegetação
+    private final Color brickColor = new Color(153, 76, 0); 
+    private final Color vegetationColor = new Color(34, 139, 34); 
 
     private final Color axeColor = new Color(80,80,80); // COR CINZA PARA O MACHADO
     private final Color cupimColor = new Color(255,0,0); // COR VERMELHA PARA O CUPIM
     private final Color amigoColor = new Color(0,0,255); // COR AZUL PARA O AMIGO
     private final Color placaColor = new Color(255,0,255); // COR BEGE PARA A PLACA
     private final Color arvoreCortColor = new Color(0,204,102); // COR VERDE CLARO PARA ÁRVORE CORTÁVEL
+    private final Color portaColor = new Color(51,25,0); // COR MARROM PRA PORTA
+    private final Color chaveColor = new Color(240,234,51); // COR AMARELO PARA CHAVE
 
-    private final int RAIO_VISAO = 5; // Raio de visão do personagem
+    private final int RAIO_VISAO = 5; 
     private int contador;
     private boolean machado;
 
@@ -38,22 +40,6 @@ public class Mapa {
         carregaMapa(arquivoMapa);
         areaRevelada = new boolean[mapa.size()+1000][mapa.get(0).length()+1000];
         atualizaCelulasReveladas();
-    }
-
-    public boolean getMachado() {
-        return machado;
-    }
-
-    public void setMachado(boolean status) {
-        this.machado = status;
-    }
-
-    public int getContador() {
-        return contador;
-    }
-
-    public void diminuiContador() {
-        this.contador--;
     }
 
     public int getX() {
@@ -85,7 +71,6 @@ public class Mapa {
         return areaRevelada[y][x];
     }
 
-    // Move conforme enum Direcao
     public boolean move(Direcao direcao) {
         int dx = 0, dy = 0;
 
@@ -114,12 +99,10 @@ public class Mapa {
         x += dx;
         y += dy;
 
-        // Atualiza as células reveladas
         atualizaCelulasReveladas();
         return true;
     }
 
-    // Verifica se o personagem pode se mover para a próxima posição
     private boolean podeMover(int nextX, int nextY) {
         int mapX = nextX / TAMANHO_CELULA;
         int mapY = nextY / TAMANHO_CELULA - 1;
@@ -150,41 +133,65 @@ public class Mapa {
     }
 
     public String interage() {
-        // A sequência utilizada para a interação é a mesma passada pelos for, ou seja, por coluna, de cima para baixo
+        // A sequência utilizada para a interação é a mesma passada pelos for, ou seja, por linha, da esquerda para direita
 
         int raioInteracao = 1; // Raio de interação 3x3 centrado no personagem
     
-        for (int i = y / TAMANHO_CELULA - 2*raioInteracao; i <= y / TAMANHO_CELULA + 2*raioInteracao; i++) {
+        for (int i = y / TAMANHO_CELULA - 1 - raioInteracao; i <= y / TAMANHO_CELULA - 1 + raioInteracao; i++) {
             for (int j = x / TAMANHO_CELULA - raioInteracao; j <= x / TAMANHO_CELULA + raioInteracao; j++) {
+
                 if (i >= 0 && i < mapa.size() && j >= 0 && j < mapa.get(i).length()) {
                     ElementoMapa elemento = getElemento(j, i);
+
                     if (elemento != null && elemento.podeInteragir()) {
-                        String mensagemInteracao = elemento.interage();
-
-                        if(elemento.getClass().getName().equals("Inimigo")) {
-                            diminuiContador();
-                        }
-
-                        if (elemento.aposInteracao()) {    
-                             
-                            if(elemento.getClass().getName().equals("VegetacaoCortavel")) {
-                                if (getMachado()) {
-                                    removeElemento(j,i);
-                                }
-                                else {
-                                    return "Você não possui um machado";
-                                }
-                            }
-                            
-                            removeElemento(j, i); // Remove o elemento se necessário
-                        }
-                        return mensagemInteracao;
+                        return verificaInteracao(elemento, j, i);
                     }
                 }
             }
         }
     
         return "Não há nenhum elemento para interagir";
+    }
+
+    private String verificaInteracao(ElementoMapa elemento, int j, int i) {
+        String mensagemInteracao = elemento.interage();
+        String nome = elemento.getClass().getName();
+
+        if(nome.equals("Inimigo")) {
+            diminuiContador();
+        }
+
+        if(nome.equals("Machado")) {
+            setMachado(true);
+        }
+
+        if(nome.equals("Amigo")) {
+            int x = 16;
+            while (x<20) {
+                removeElemento(x, 5);
+                x++;
+            }
+        }
+
+        if (elemento.aposInteracao()) {    
+                             
+            if(nome.equals("VegetacaoCortavel")) {
+                if (getMachado()) {
+                    removeElemento(j,i);
+                }
+                else {
+                    return "Você não possui um machado";
+                }
+            }
+
+            if(getContador() == 2) {
+                removeElemento(44, 21);
+            }
+                            
+            removeElemento(j, i); // Remove o elemento se necessário
+        }
+
+        return mensagemInteracao;
     }
 
     private void removeElemento(int x, int y) {
@@ -195,9 +202,24 @@ public class Mapa {
         }
     }
 
+    public boolean getMachado() {
+        return machado;
+    }
+
+    public void setMachado(boolean status) {
+        this.machado = status;
+    }
+
+    public int getContador() {
+        return contador;
+    }
+
+    public void diminuiContador() {
+        this.contador--;
+    }
+
     public String ataca() {
-        //TODO: Implementar
-        return "Ataca";
+        return "Acho que isso não faz nada...";
     }
 
     private void carregaMapa(String filename) {
@@ -242,5 +264,6 @@ public class Mapa {
         elementos.put('C', new Inimigo('ϫ', cupimColor));
         elementos.put('A', new Amigo('ʘ', amigoColor));
         elementos.put('D', new Placa('Ƥ', placaColor));
+        elementos.put('G', new Porta('Ħ', portaColor));
     }
 }
